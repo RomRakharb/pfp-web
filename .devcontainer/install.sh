@@ -12,6 +12,7 @@ sudo add-apt-repository -y ppa:maveonair/helix-editor
 sudo apt update
 sudo apt install helix
 cargo install bacon
+rustup component add rust-analyzer
 echo
 echo "---------------------"
 echo "install script ends"
