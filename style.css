@@ -1,0 +1,27 @@
+header {
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+}
+
+header .logo {
+  height: 50px;
+  width: 100px;
+  background-color: gray;
+}
+
+header nav {
+  display: flex;
+  align-items: stretch;
+  height: 50px;
+}
+
+header nav button {
+  border: none;
+  text-align: center;
+  padding: 0px 10px;
+}
+
+header nav .home {
+  color: red;
+}
