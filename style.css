@@ -1,3 +1,4 @@
+/* --------- Header ---------- */
 header {
   background-color: white;
   display: flex;
@@ -5,23 +6,35 @@ header {
 }
 
 header .logo {
-  height: 50px;
-  width: 100px;
+  height: 100px;
+  width: 200px;
   background-color: gray;
 }
 
 header nav {
   display: flex;
-  align-items: stretch;
-  height: 50px;
+  padding-bottom: 10px;
 }
 
 header nav button {
   border: none;
   text-align: center;
   padding: 0px 10px;
+  background-color: white;
+  font-size: 18px;
+  margin-top: auto;
 }
 
 header nav .home {
-  color: red;
+  color: darkred;
+}
+
+header nav button:hover {
+  color: darkred;
+}
+
+/* --------- Hero ---------- */
+#hero-img {
+  height: 300px;
+  background-color: gray;
 }
