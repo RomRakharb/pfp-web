@@ -3,25 +3,25 @@ header {
   background-color: white;
   display: flex;
   justify-content: space-between;
+  padding-bottom: 1vh;
+  height: 9vh;
 }
 
 header .logo {
-  height: 100px;
-  width: 200px;
-  background-color: gray;
+  height: 9vh;
 }
 
 header nav {
   display: flex;
-  padding-bottom: 10px;
+  padding-bottom: 1vh;
 }
 
 header nav button {
   border: none;
   text-align: center;
-  padding: 0px 10px;
+  padding: 0px 1vh;
   background-color: white;
-  font-size: 18px;
+  font-size: 20px;
   margin-top: auto;
 }
 
@@ -33,8 +33,21 @@ header nav button:hover {
   color: darkred;
 }
 
-/* --------- Hero ---------- */
-#hero-img {
-  height: 300px;
+/* --------- Cover ---------- */
+
+.first-section {
+  height: 40vh;
   background-color: gray;
 }
+
+.second-section {
+  height: 50vh;
+  background-color: yellowgreen;
+}
+
+.section {
+  height: 50vh;
+  background-color: cadetblue;
+}
+
+/* ---------- News/Announcment ---------- */
