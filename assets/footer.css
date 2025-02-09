@@ -1,0 +1,25 @@
+footer {
+  background-color: crimson;
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-evenly;
+}
+
+footer #address {
+  color: white;
+  text-align: center;
+}
+
+footer p {
+  line-height: 0.8;
+}
+
+footer nav ul {
+  list-style-type: none;
+  color: white;
+}
+
+footer a {
+  text-decoration: none;
+  color: white;
+}

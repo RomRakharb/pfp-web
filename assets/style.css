@@ -1,0 +1,32 @@
+.logo {
+  height: 9vh;
+  align-self: center;
+}
+
+.icon {
+  height: 1em;
+}
+
+.news-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  display: block;
+  width: 20vw;
+}
+
+.news-placeholder {
+  background-color: blue;
+  height: 15vw;
+  width: 20vw;
+}
+
+.news-details {
+  white-space: nowrap;
+  width: 20vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.news-details .bottom-bar {
+  display: flex;
+  justify-content: space-evenly;
+}
