@@ -1,0 +1,29 @@
+body {
+	background-color: gray;
+	/* font-family: sans-serif; */
+	/* text-align: center; */
+}
+
+header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	overflow: hidden;
+	background-color: white;
+	height: 10vh;
+}
+
+header .logo {}
+
+header nav {}
+
+header nav a {
+	font-size: 20;
+	margin: 1vw;
+	padding: 1vw;
+}
+
+header nav a:hover {
+	color: crimson;
+	cursor: pointer;
+}

@@ -2,6 +2,6 @@
 name = "rust"
 
 [language-server.rust-analyzer.config]
-check.command = "clippy"
 cargo = { allFeatures = true }
+check.command = "clippy"
 rustfmt.overrideCommand = [ "leptosfmt", "--stdin", "--rustfmt" ]
