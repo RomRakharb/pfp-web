@@ -1,29 +1,50 @@
 body {
 	background-color: gray;
+	margin: 0;
 	/* font-family: sans-serif; */
 	/* text-align: center; */
 }
 
 header {
-	display: flex;
-	justify-content: space-between;
 	align-items: center;
 	overflow: hidden;
 	background-color: white;
-	height: 10vh;
 }
 
-header .logo {}
+.logo {
+	float: left;
+	height: 10vh;
+	padding: 1vh;
+}
 
-header nav {}
+header nav {
+	float: right;
+}
 
 header nav a {
-	font-size: 20;
+	font-size: 2vh;
 	margin: 1vw;
 	padding: 1vw;
+}
+
+header nav button {
+	background-color: yellow;
 }
 
 header nav a:hover {
 	color: crimson;
 	cursor: pointer;
+}
+
+footer {
+	background-color: crimson;
+	overflow: auto;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+footer p {
+	color: white;
+	text-align: center;
 }

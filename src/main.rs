@@ -7,6 +7,8 @@ async fn main() {
     use leptos::prelude::*;
     use leptos_axum::{generate_route_list, LeptosRoutes};
     use pfp_web::app::*;
+    use tower_http::services::ServeDir;
+
 
     let conf = get_configuration(None).unwrap();
     let addr = conf.leptos_options.site_addr;
@@ -20,7 +22,7 @@ async fn main() {
             move || shell(leptos_options.clone())
         })
         .fallback(leptos_axum::file_and_error_handler(shell))
-        .with_state(leptos_options);
+        .with_state(leptos_options).nest_service("/public", ServeDir::new("public"));
 
     // run our app with hyper
     // `axum::Server` is a re-export of `hyper::Server`
