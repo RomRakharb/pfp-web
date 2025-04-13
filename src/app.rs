@@ -2,19 +2,16 @@ use leptos::prelude::*;
 use leptos_meta::{provide_meta_context, MetaTags, Stylesheet, Title};
 use leptos_router::{
     components::{ParentRoute, Route, Router, Routes},
-    hooks::use_url,
     nested_router::Outlet,
     path, StaticSegment,
 };
-use reactive_stores::Store;
+use thaw::ssr::SSRMountStyleProvider;
+use thaw::*;
 
-#[derive(Clone, Debug, Default, Store)]
-struct GlobalState {
-    language: Language,
-}
+use crate::component::{Footer, Header};
 
 #[derive(Clone, Debug, Default)]
-enum Language {
+pub enum Language {
     #[default]
     Thai,
     English,
@@ -22,19 +19,21 @@ enum Language {
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
-        <!DOCTYPE html>
-        <html lang="en">
-            <head>
-                <meta charset="utf-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <AutoReload options=options.clone() />
-                <HydrationScripts options />
-                <MetaTags />
-            </head>
-            <body>
-                <App />
-            </body>
-        </html>
+        <SSRMountStyleProvider>
+            <!DOCTYPE html>
+            <html lang="th">
+                <head>
+                    <meta charset="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <AutoReload options=options.clone() />
+                    <HydrationScripts options />
+                    <MetaTags />
+                </head>
+                <body>
+                    <App />
+                </body>
+            </html>
+        </SSRMountStyleProvider>
     }
 }
 
@@ -48,16 +47,17 @@ pub fn App() -> impl IntoView {
         // id=leptos means cargo-leptos will hot-reload this stylesheet
         <Stylesheet id="leptos" href="/pkg/pfp-web.css" />
 
-        // sets the document title
-        <Title text="พิสูจน์หลักฐานจังหวัดภูเก็ต" />
-
         // content for this welcome page
         <Router>
             <main>
                 <Routes fallback=|| "Page not found.".into_view()>
-                    <Route path=StaticSegment("") view=HomePage />
                     <ParentRoute path=path!("/en") view=English>
                         <Route path=StaticSegment("") view=HomePage />
+                        <Route path=path!("/news") view=NewsPage />
+                    </ParentRoute>
+                    <ParentRoute path=path!("") view=Thai>
+                        <Route path=StaticSegment("") view=HomePage />
+                        <Route path=path!("/news") view=NewsPage />
                     </ParentRoute>
                 </Routes>
             </main>
@@ -68,118 +68,57 @@ pub fn App() -> impl IntoView {
 #[component]
 fn English() -> impl IntoView {
     provide_context(Language::English);
-    view! { <Outlet /> }
+    view! {
+        <Title text="Phuket Forensic Police" />
+        <Outlet />
+    }
+}
+
+#[component]
+fn Thai() -> impl IntoView {
+    view! {
+        <Title text="พิสูจน์หลักฐานจังหวัดภูเก็ต" />
+        <Outlet />
+    }
 }
 
 /// Renders the home page of your application.
 #[component]
 fn HomePage() -> impl IntoView {
-    let language: Language = use_context().unwrap_or(Language::Thai);
-
     view! {
-        <Header language=&language />
-        <h1>HomePage</h1>
-        <h1>HomePage</h1>
-        <h1>HomePage</h1>
-        <h1>HomePage</h1>
-        <Footer language=&language />
+        <Header />
+        <Hero />
+        <NewsAndAnnoucement />
+        <Footer />
     }
 }
 
 #[component]
-fn Header<'a>(language: &'a Language) -> impl IntoView {
-    let url = use_url().get_untracked();
+fn NewsPage() -> impl IntoView {
     view! {
-        <header>
-            <img class="logo" src="/public/logo.png" />
-            {match language {
-                Language::Thai => {
-                    view! {
-                        <nav>
-                            <a href="">"หน้าแรก"</a>
-                            <a>"ติดต่อ"</a>
-                            <a>"เกี่ยวกับ"</a>
-                            <a href=format!("/en{}", url.path())>"English"</a>
-                        </nav>
-                    }
-                }
-                Language::English => {
-                    view! {
-                        <nav>
-                            <a href="">"Home"</a>
-                            <a>"Contact"</a>
-                            <a>"About"</a>
-                            <a href=format!(
-                                "{}",
-                                url.path().trim_start_matches("/en"),
-                            )>"ภาษาไทย"</a>
-                        </nav>
-                    }
-                }
-            }}
-        </header>
+        <Header />
+        <h1>"News"</h1>
+        <Footer />
     }
 }
 
 #[component]
-fn Footer<'a>(language: &'a Language) -> impl IntoView {
+fn Hero() -> impl IntoView {
+    view! { <section class="hero-placeholder"></section> }
+}
+
+#[component]
+fn NewsAndAnnoucement() -> impl IntoView {
     view! {
-        <footer>
-            <img class="logo" src="/public/white_logo.png" />
-            {match language {
-                Language::Thai => {
-                    view! {
-                        <div>
-                            <p>
-                                "พิสูจน์หลักฐานจังหวัดภูเก็ต"
-                                <br />
-                                "323/39 ถนนเยาวราช ตำบลตลาดใหญ่"
-                                <br />
-                                "อำเภอเมืองภูเก็ต จังหวัดภูเก็ต 83000"
-                                <br /> "โทรศัพท์: 0 - 7621 - 1176"
-                            </p>
-                        </div>
-                        <div>
-                            <p>
-                                "พิสูจน์หลักฐานจังหวัดภูเก็ต (ไม้ขาว)"
-                                <br /> "102 หมู่ที่ 7 ตำบลไม้ขาว"
-                                <br />
-                                "อำเภอถลาง จังหวัดภูเก็ต 83110"
-                                <br /> "โทรศัพท์: 0 - 7653 - 0124"
-                            </p>
-                        </div>
-                        <div>
-                            <p>เว็บไซต์ที่เกี่ยวข้อง</p>
-                            <ul>
-                                <li>
-                                    <a rel="external" href="https://www.royalthaipolice.go.th">
-                                        "สำนักงานตำรวจแห่งชาติ"
-                                    </a>
-                                </li>
-                                <li>
-                                    <a rel="external" href="https://www.forensic.police.go.th">
-                                        "สำนักงานพิสูจน์หลักฐานตำรวจ"
-                                    </a>
-                                </li>
-                                <li>
-                                    <a rel="external" href="https://criminal.police.go.th">
-                                        "กองทะเบียนประวัติอาชญากร"
-                                    </a>
-                                </li>
-                                <li>
-                                    <a rel="external" href="https://scdc8.forensic.police.go.th">
-                                        "ศูนย์พิสูจน์หลักฐาน 8"
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div></div>
-                    }
-                }
-                Language::English => todo!(),
-            }}
-        </footer>
+        <section class="news-announcement">
+            <h1>"ข่าว / ประกาศ"</h1>
+        </section>
     }
+}
+
+#[component]
+fn CriminalRecordCheck() -> impl IntoView {
+    view! {}
 }
 
 #[component]

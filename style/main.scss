@@ -1,14 +1,7 @@
 body {
 	background-color: gray;
 	margin: 0;
-	/* font-family: sans-serif; */
-	/* text-align: center; */
-}
-
-header {
-	align-items: center;
-	overflow: hidden;
-	background-color: white;
+	font-family: sans-serif;
 }
 
 .logo {
@@ -17,23 +10,28 @@ header {
 	padding: 1vh;
 }
 
-header nav {
-	float: right;
-}
+header {
+	align-items: center;
+	overflow: hidden;
+	background-color: white;
 
-header nav a {
-	font-size: 2vh;
-	margin: 1vw;
-	padding: 1vw;
-}
+	nav {
+		float: right;
+		display: flex;
 
-header nav button {
-	background-color: yellow;
-}
+		a {
+			color: black;
+			text-decoration: none;
+			font-size: 2vh;
+			margin: 1vw;
+			padding: 1vw;
+		}
 
-header nav a:hover {
-	color: crimson;
-	cursor: pointer;
+		a:hover {
+			color: crimson;
+			cursor: pointer;
+		}
+	}
 }
 
 footer {
@@ -42,9 +40,27 @@ footer {
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
+
+	p {
+		color: white;
+		text-align: center;
+	}
+
+	a {
+		color: white;
+	}
 }
 
-footer p {
-	color: white;
-	text-align: center;
+.hero-placeholder {
+	display: flex;
+	height: 40vh;
+	background-color: gray;
+}
+
+.news-announcement {
+	background-color: white;
+
+	h1 {
+		text-align: center;
+	}
 }
