@@ -5,8 +5,6 @@ use leptos_router::{
     nested_router::Outlet,
     path, StaticSegment,
 };
-use thaw::ssr::SSRMountStyleProvider;
-use thaw::*;
 
 use crate::component::{Footer, Header};
 
@@ -19,21 +17,19 @@ pub enum Language {
 
 pub fn shell(options: LeptosOptions) -> impl IntoView {
     view! {
-        <SSRMountStyleProvider>
-            <!DOCTYPE html>
-            <html lang="th">
-                <head>
-                    <meta charset="utf-8" />
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <AutoReload options=options.clone() />
-                    <HydrationScripts options />
-                    <MetaTags />
-                </head>
-                <body>
-                    <App />
-                </body>
-            </html>
-        </SSRMountStyleProvider>
+        <!DOCTYPE html>
+        <html lang="th">
+            <head>
+                <meta charset="utf-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <AutoReload options=options.clone() />
+                <HydrationScripts options />
+                <MetaTags />
+            </head>
+            <body>
+                <App />
+            </body>
+        </html>
     }
 }
 
